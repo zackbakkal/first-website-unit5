@@ -98,7 +98,36 @@
 		border: 1px solid black;
 		padding: 5px;
 		margin: 20px;
-	}
+    }
+    
+    /*Each span inside a table data cell is displayed inline block, has an orange
+    background color*/
+    td span {
+        display: inline-block;
+        background-color: #e49012;
+        width: 12%;
+        text-align: center;
+        border-radius: 1px;
+    }
+
+    /*Hovering over the span will give it a shadow a pointer cursor*/
+    td span:hover {
+        box-shadow: 0 0 2px 2px black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /*Clicking on the span will make the shadow disappear*/
+    td span:active {
+        box-shadow: 0 0 0 0;
+    }
+
+    /*Each paragraph inside the table data cell will be display as inline block*/
+    td p {
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+    }
     
     /*Every table's even child (row) will get a different color than an odd row. Making the
     table readable*/
@@ -401,10 +430,20 @@
     /***********
     * removeMe *
     ***********/
-    
-    .removeMe:hover {
-        font-weight: bold;
+
+    .removeMe0, .removeMe1,.removeMe2 {
+        background-color: red;
     }
+    
+    .removeMe0:hover, .removeMe1:hover,.removeMe2:hover {
+        font-weight: bold;
+        box-shadow: 0 0 5px 1px black;
+    }
+
+    .removeMe0:active, .removeMe1:active,.removeMe2:active {
+        box-shadow: 0 0 0 0;
+    }
+
     /*************************
     * other helpfull classes *
     *************************/
@@ -513,6 +552,35 @@
             position: absolute;
             left: 5px;
         }
+
+        /*Each span inside a table data cell is displayed inline block, has an orange
+        background color*/
+        td span {
+            display: inline-block;
+            background-color: #e49012;
+            width: 12%;
+            text-align: center;
+            border-radius: 1px;
+        }
+
+        /*Hovering over the span will give it a shadow a pointer cursor*/
+        td span:hover {
+            box-shadow: 0 0 2px 2px black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /*Clicking on the span will make the shadow disappear*/
+        td span:active {
+            box-shadow: 0 0 0 0;
+        }
+
+        /*Each paragraph inside the table data cell will be display as inline block*/
+        td p {
+            display: inline-block;
+            width: 50%;
+            text-align: center;
+        }
         
         /*For every table row give it a 5px bottom margin and a solid blcak border of 2px*/
         tr {
@@ -547,7 +615,7 @@
         tbody td:nth-of-type(4):before {
             content: "Total: ";
         }
-    
+
         tfoot td:nth-of-type(1):before {
             content: "Total Qty: ";
         }
@@ -820,5 +888,17 @@
         /*When it is clicked we remove the shadow making an effect of a clicked button*/
         .add:active {
             box-shadow: 0 0 0 0;
-        }  
+        }
+
+        /***********
+        * removeMe *
+        ***********/
+        
+        .removeMe0, .removeMe1, .removeMe2 {
+            background-color: red;
+        }
+
+        .removeMe0:active, .removeMe1:hover,.removeMe2:hover {
+            font-weight: bold;
+        }
     }
