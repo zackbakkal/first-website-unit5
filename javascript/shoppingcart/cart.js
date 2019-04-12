@@ -1,3 +1,11 @@
+/**
+ * File Name: cart.js
+ * Author: Zakaria Bakkal
+ * Version: 2
+ * Date: April 08, 2019
+ * Description: This class is used to represent a shopping cart.
+ */
+
 class Cart {
 
     constructor() {
@@ -183,11 +191,11 @@ class Cart {
     }
 
     incrementTotalQty() {
-        this.totalQty++;
+        parseFloat((this.totalQty++).toFixed(2));
     }
 
     decrementTotalQty() {
-        this.totalQty--;
+        parseFloat((this.totalQty--).toFixed(2));
     }
 
     /*
@@ -204,5 +212,6 @@ class Cart {
     updateLocalStorage() {
         console.log(JSON.stringify(this.data));
         localStorage.setItem("mycart", JSON.stringify(this.data));
+        localStorage.setItem("carttotalqty", this.totalQty);
     }
 }

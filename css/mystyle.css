@@ -36,8 +36,29 @@
     
     /*The nav element which holds the major navigation bar float to the right*/
     nav {
-		float: right;
-	}
+        float: left;
+        width: 100%;
+    }
+    
+    nav ul {
+        width: 85%;
+        float: left;
+    }
+
+    nav #carticon {
+        position: relative;
+        width: 15%;
+        height: auto;
+        float: right;
+    }
+
+    nav #carticon img, nav #carticon p {
+        width: 50%;
+        float: left;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
     
     /*For every anchor inside a van element we remove text decoration and give them
     a white text color*/
@@ -45,9 +66,16 @@
 		text-decoration: none;
 		color: white;
     }
+
+    /*For every li element in ul element inside a div element that is a child of a 
+    nav element the font size is set to 0.9em*/
+	nav div ul li {
+        background-color: black;
+		font-size: .6em;
+    }
     
     /*For every img element the max width is 100%, height will be auto and proportionate
-    with the width. We givew them rounded corners of 10px. Their background color is set 
+    with the width. We give them rounded corners of 10px. Their background color is set 
     to white. Also, we give a shadow going down and a margin from the top of 20px*/
     img {
 		max-width: 100%;
@@ -57,13 +85,6 @@
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		margin-top: 20px;
 	}
-
-    /*For every li element in ul element inside a div element that is a child of a 
-    nav element the font size is set to 0.9em*/
-	nav div ul li {
-        background-color: black;
-		font-size: .9em;
-    }
 
     /*In input of type number will have a width of 15%, 5px padding and floats right*/
     input[type=number] {
@@ -243,6 +264,27 @@
     /*When we hover over a link we will change its color to a lighter color*/
 	#navigation li:hover {
 		background-color: #1119;
+    }
+
+    #menu {
+        display: initial;
+    }
+
+    /***********
+    * carticon *
+    ***********/
+
+    #carticon img {
+        position: relative;
+        box-shadow: 0 0 0 0;
+    }
+
+    #carticon img:hover {
+        box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #carticon img:active {
+        box-shadow: 0 0 0 0;
     }
     
     /**************
@@ -527,6 +569,23 @@
             left: 0;
             width: 100%;
             padding-left: 20px;
+            width: 85%;
+            margin-top: 0;
+        }
+    
+        nav #carticon {
+            position: relative;
+            width: 15%;
+            height: auto;
+            float: right;
+        }
+    
+        nav #carticon img, nav #carticon p {
+            width: 50%;
+            float: left;
+            margin: 0;
+            padding: 0;
+            text-align: left;
         }
 
         /*Change the table look. No borders, full width and a bottom margin of 30px*/
@@ -676,6 +735,10 @@
         /***********
         * dropdown *
         ***********/
+
+        #dropdown {
+            width: 75%;
+        }
     
         /*Remove decoration from the anchor element in the dropdown menu*/
         #dropdown div {
@@ -717,6 +780,26 @@
             text-decoration: none;
             color: #fff;
             background: #2f3036;
+        }
+
+        /***********
+        * carticon *
+        ***********/
+
+        #carticon {
+            width: 15%;
+        }
+
+        #carticon img {
+            width: 85%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #carticon p {
+            width: 15%;
+            margin: 0;
+            padding: 0;
         }
 
         /*******

@@ -1,3 +1,13 @@
+/**
+ * File Name: mycart.js
+ * Author: Zakaria Bakkal
+ * Version: 4
+ * Date: April 08, 2019
+ * Description: This script handles the shopping cart.
+ *              it displays, adds and remove items from
+ *              the shopping cart.
+ */
+
 var myCart;
 var tableBody;
 var totalQty;
@@ -18,13 +28,16 @@ function start() {
     // retrieve the cart from the local storage
     myCart = new Cart();
     myCart.loadCart(JSON.parse(localStorage.getItem("mycart")));
-    console.log(JSON.parse(localStorage.getItem("mycart")));
 
-    // Retrieve the clear button element and add an event listner when clicked
+    // Retrieve the clear button element and add an event 
+    // listner when clicked
     var clear = document.getElementById("clear");
     clear.addEventListener("click", clearCart, false);
 
-    console.log(myCart);
+    // Retrive the checkout button element and add an event 
+    // listner when clicked
+    var checkOut = document.getElementById("checkout");
+    checkOut.addEventListener("click", payPalCheckOut, false);
 
     displayItems();
 }
@@ -129,7 +142,7 @@ function displayItem(row, rowNumber) {
     // create a table data cell for item total price, and add
     // the total price to the innerHtml, then append the cell to the row
     var total = document.createElement("td");
-    total.innerHTML = row._totalPrice;
+    total.innerHTML = parseFloat((row._totalPrice).toFixed(2));
     tableRow.appendChild(total);
 
     // Add the removeMe button to the row
@@ -140,10 +153,10 @@ function displayItem(row, rowNumber) {
 
     //add an event listner to the removeMe button
     removeMe.addEventListener("click", function () {
+        // remove row with number rowNumber
         removeRow(rowNumber);
 
-        console.log(myCart);
-
+        // store the cart on local storage
         localStorage.setItem("mycart", JSON.stringify(myCart.data));
 
         // Display the shopping cart total qty of items
@@ -156,34 +169,122 @@ function displayItem(row, rowNumber) {
 
     }, false);
 
-    // add an event listner to the minus and plus buttons
+    // add an event listner to the minus buttons
     minus.addEventListener("click", function () {
+        // decrease the item at rowNumber
         minusProduct(rowNumber);
+        // redisplay the cart
         displayItems();
     }, false);
+
+    // add an event listner to the plus buttons
     plus.addEventListener("click", function () {
+        // increase item qty
         plusProduct(rowNumber);
+        // redisplay the cart
         displayItems();
     }, false);
 }
 
+/*
+* Removes an entire row from the cart
+*/
 function removeRow(rowNumber) {
     myCart.removeRow(rowNumber);
 }
 
+/*
+* Decreases the quantity of an item
+*/
 function minusProduct(rowNumber) {
     myCart.minusProduct(rowNumber);
 }
 
+/*
+* Increases the quantity of an item
+*/
 function plusProduct(rowNumber) {
     myCart.plusProduct(rowNumber);
 }
 
+/*
+* Remove all items from the cart
+*/
 function clearCart() {
+    // clear the cart
     myCart.clear();
-    tableBody.innerHTML = "";
+    // remove all children of table body
+    while (tableBody.firstElementChild) {
+        tableBody.removeChild(tableBody.firstElementChild);
+    }
+    // reset the total quantity
     totalQty.innerHTML = 0;
+    //reset the total price
     totalPrice.innerHTML = parseFloat((0).toFixed(2));
+}
+
+function payPalCheckOut() {
+    document.getElementById("checkout").innerHTML = "<p>Check Out</p>";
+    if (myCart._totalQty > 0) {
+        // iterate through the cart rows and generate
+        // JSON object for item_list
+        var item_list = [];
+        myCart._rows.forEach(row => {
+            var SKU;
+            var name = row._product._name;
+            var description;
+            var quantity = row._qty;
+            var price = row._product._price;
+
+            switch (row._product._name) {
+                case "Argani Oil":
+                    SKU = 12345;
+                    description = "30 ml Acrylic airless pump bottle";
+                    break;
+                case "Exfoliating Soap":
+                    SKU = 98765;
+                    descripotion = "250 g jar";
+                    break;
+                case "Lava Clay":
+                    SKU = 34256;
+                    description = "250 g jar"
+                    break;
+            }
+
+            var item = {
+                "SKU": SKU,
+                "name": name,
+                "description": description,
+                "quantity": quantity,
+                "price": price
+            };
+
+            item_list.push({ "item": item });
+
+        });
+
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            "currency_code": "CAD",
+                            "purchase_unit": `${myCart._totalQty}`,
+                            "value": `${myCart._totalPrice}`
+                        },
+                        item_list: item_list
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                // Capture the funds from the transaction
+                return actions.order.capture().then(function (details) {
+                    // Show a success message to your buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                });
+            }
+        }).render(document.getElementById("checkout"));
+    }
 }
 
 window.addEventListener("load", start, false);

@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="HandheldFriendly" content="true">
+	<link rel="shortcut icon" href="pics/kbreelogo.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="css/mystyle.css" />
 	<script src="javascript/menu/sandwichbars.js"></script>
 	<title>K-Bree Cosmetics</title>
@@ -27,6 +28,20 @@
 
 	<div id="navigation" class="clearfix">
 		<nav>
+			<div id="carticon">
+				<a href="Cart.html"><img src="pics/cart.png" alt="Shopping Cart Icon" /></a>
+				<p id="carttotalqty">
+					<script>
+						if (localStorage.getItem("mycart") == null) {
+							document.getElementById("carttotalqty").innerHTML = 0;
+						} else {
+							document.getElementById("carttotalqty").innerHTML =
+								localStorage.getItem("carttotalqty");
+						}
+					</script>
+				</p>
+			</div>
+
 			<div id="dropdown">
 				<div id="sandwichbars">
 					<div id="bar1"></div>
@@ -54,8 +69,8 @@
 			</header>
 
 			<div id="intro" class="clearfix">
-				<p>K-Bree cosmetics is a provider of 100 percent Pure Organic Beauty Products for your Skin,
-					Hair and Nails. After over seeing every step of production for all of our products, we
+				<p>K-Bree cosmetics is a provider of 100 percent pure organic beauty products for your skin,
+					hair and nails. After over seeing every step of production for all of our products, we
 					then ship your order right to your door.</p>
 				<div class="round">
 					<img src="pics/arganfield.jpg" id="picture" alt="Argan field" />

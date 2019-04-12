@@ -27,10 +27,12 @@ function start() {
     menu = document.getElementById("menu");
     menu.style.display = "none";
 
-    // Check if the user is using a device with min-width of 768px, if
-    // so we show the menu
-    if (screen.width >= 768) {
-        menu.style.removeProperty("display");
+    // Check if the user is using a device with max-width of 768px, if
+    // so we hide the menu
+    if (screen.width < 768) {
+        menu.style.display = "none";
+    } else { // otherwise we put it back to its initial value (displayed)
+        menu.style.display = "initial";
     }
 
     // Retrieve the element from the DOM with the id name bar1 and
