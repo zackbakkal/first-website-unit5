@@ -34,11 +34,6 @@ function start() {
     var clear = document.getElementById("clear");
     clear.addEventListener("click", clearCart, false);
 
-    // Retrive the checkout button element and add an event 
-    // listner when clicked
-    var checkOut = document.getElementById("checkout");
-    checkOut.addEventListener("click", payPalCheckOut, false);
-
     displayItems();
 }
 
@@ -221,70 +216,6 @@ function clearCart() {
     totalQty.innerHTML = 0;
     //reset the total price
     totalPrice.innerHTML = parseFloat((0).toFixed(2));
-}
-
-function payPalCheckOut() {
-    document.getElementById("checkout").innerHTML = "<p>Check Out</p>";
-    if (myCart._totalQty > 0) {
-        // iterate through the cart rows and generate
-        // JSON object for item_list
-        var item_list = [];
-        myCart._rows.forEach(row => {
-            var SKU;
-            var name = row._product._name;
-            var description;
-            var quantity = row._qty;
-            var price = row._product._price;
-
-            switch (row._product._name) {
-                case "Argani Oil":
-                    SKU = 12345;
-                    description = "30 ml Acrylic airless pump bottle";
-                    break;
-                case "Exfoliating Soap":
-                    SKU = 98765;
-                    descripotion = "250 g jar";
-                    break;
-                case "Lava Clay":
-                    SKU = 34256;
-                    description = "250 g jar"
-                    break;
-            }
-
-            var item = {
-                "SKU": SKU,
-                "name": name,
-                "description": description,
-                "quantity": quantity,
-                "price": price
-            };
-
-            item_list.push({ "item": item });
-
-        });
-
-        paypal.Buttons({
-            createOrder: function (data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            "currency_code": "CAD",
-                            "purchase_unit": `${myCart._totalQty}`,
-                            "value": `${myCart._totalPrice}`
-                        },
-                        item_list: item_list
-                    }]
-                });
-            },
-            onApprove: function (data, actions) {
-                // Capture the funds from the transaction
-                return actions.order.capture().then(function (details) {
-                    // Show a success message to your buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name);
-                });
-            }
-        }).render(document.getElementById("checkout"));
-    }
 }
 
 window.addEventListener("load", start, false);
