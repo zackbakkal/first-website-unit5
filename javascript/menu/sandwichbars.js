@@ -98,18 +98,12 @@ function toggleClass(element, className) {
     if (element.classList) {
         // Toggles between the bar1 class and the change class
         element.classList.toggle(className);
-
-        // Toggles between the bar2 class and the change class
-        element.classList.toggle(className);
-
-        // Toggles between the bar3 class and the change class
-        element.classList.toggle(className);
     } else {
         // For IE9
 
         // Retrieve the class attribute content and split the
         // words at the space to get an array of class names
-        var classes = bar1.className.split(" ");
+        var classes = element.className.split(" ");
         // Retrieve the index of the class we want to toggle
         var i = classes.indexOf(className);
 
