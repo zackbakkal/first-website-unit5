@@ -57,7 +57,7 @@ class Cart {
     *    -storage[2]: Represents the total price of the cart
     */
     loadCart(storage) {
-        console.log(storage);
+        //console.log(storage);
         if (storage != null) {
             this.rows = storage[0];
             this.totalQty = storage[1];

@@ -6,7 +6,7 @@
     /*Include padding and border in the every element's total width and height*/
 	* {
         box-sizing: border-box;
-		/*border: solid black 1px;*/
+		border: solid black 1px;
     }
 
     /***********************************************/
@@ -276,6 +276,7 @@
 
     #carticon img {
         position: relative;
+        left: 25%;
         box-shadow: 0 0 0 0;
     }
 
@@ -285,6 +286,35 @@
 
     #carticon img:active {
         box-shadow: 0 0 0 0;
+    }
+
+    #dropdowncart {
+        position: absolute;
+        background-color: rgb(255, 206, 153);
+        z-index: -1;
+        bottom: -100px;
+        left: -200%;
+        width: 400%;
+    }
+
+    #dropdowncart p {
+        margin: 5px;
+        display: block;
+        width: 100%;
+    }
+
+    #dropdowncart p span {
+        padding: 5px;
+        margin-left: 5px;
+        width: 25%;
+    }
+
+    #carttotalqty {
+        position: absolute;
+        top: 0;
+        right: 5px;
+        font-weight: bold;
+        font-size: .8em;
     }
     
     /**************
@@ -474,6 +504,7 @@
     ***********/
 
     .removeMe0, .removeMe1,.removeMe2 {
+        width: 2%;
         background-color: red;
     }
     
@@ -520,6 +551,10 @@
 	
 	.round {
 		border-radius:10px;
+    }
+
+    .hidden {
+        display: none;
     }
     
 }
@@ -800,6 +835,14 @@
             width: 15%;
             margin: 0;
             padding: 0;
+        }
+
+        #carttotalqty {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-weight: bold;
+            font-size: .8em;
         }
 
         /*******

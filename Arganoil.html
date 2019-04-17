@@ -14,6 +14,7 @@
 	<script src="javascript/shoppingcart/row.js"></script>
 	<script src="javascript/shoppingcart/cart.js"></script>
 	<script src="javascript/addproducts/addarganoil.js"></script>
+	<script src="javascript/dropdowncart/dropdowncart.js"></script>
 	<title>K-Bree Cosmetics</title>
 </head>
 
@@ -32,8 +33,9 @@
 	<div id="navigation" class="clearfix">
 		<nav>
 			<div id="carticon">
-				<a href="Cart.html"><img src="pics/cart.png" alt="Shopping Cart Icon" /></a>
-				<p id="carttotalqty"></p>
+				<a href="Cart.html"><img id="carticonimg" src="pics/cart.png" alt="Shopping Cart Icon" /></a>
+				<p id="carttotalqty" class="clearfix"></p>
+				<div id="dropdowncart" class="hidden"></div>
 			</div>
 			<div id="dropdown">
 				<div id="sandwichbars">
